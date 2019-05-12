@@ -1,2 +1,2 @@
 # Huarongdao
-A chinese game about sanguo history.
+A chinese game from sanguo history.
