@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">klotski</string>
     <string name="begin_text">开始游戏</string>
+    <string name="steps_num">步数：</string>
 </resources>
