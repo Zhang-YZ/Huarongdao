@@ -4,6 +4,14 @@
     <gradient android:startColor="#0066FF"
         android:endColor="#00FFFF"
         android:angle="270" />
-    <corners android:radius="3dp" />
-    <stroke android:width="5px" android:color="#000000" />
+    <!--<gradient-->
+        <!--android:angle="0"-->
+        <!--android:centerX="0.5"-->
+        <!--android:centerY="0.5"-->
+        <!--android:startColor="#0066FF"-->
+        <!--android:endColor="#00FFFF"-->
+        <!--android:gradientRadius="40dp"-->
+        <!--android:type="radial" />-->
+    <!--<corners android:radius="3dp" />-->
+    <stroke android:width="10px" android:color="#C1C064" />
 </shape>

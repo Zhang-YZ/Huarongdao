@@ -1,16 +1,16 @@
 package com.example.zyz.klotski.Assembly;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.Canvas;
+import android.graphics.Color;
+import android.text.Layout;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.util.TypedValue;
-import android.view.MotionEvent;
-import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.example.zyz.klotski.GamePage;
+import com.example.zyz.klotski.R;
+
+import java.io.Serializable;
 
 
 public class KlotskiLayout extends RelativeLayout {
@@ -47,8 +47,13 @@ public class KlotskiLayout extends RelativeLayout {
         Log.d(GamePage.LOG_MESSAGE, "=======================Layout_onLayout " + changed + " " + left + " " + top + " " + right + " " + bottom);
     }
 
-    public void setChess(KlotskiButton[] buttons, boolean init) {
+
+    public void setChess(ChessButtonArray chessButtonArray, boolean init) {
+        /**
+         * 根据按钮快照设置棋盘数组
+         */
         int chessLength = GamePage.LENGTH_CHESS_Y, chessWidth = GamePage.LENGTH_CHESS_X;
+
         if (init) {
             this.chess = new int[chessWidth][];
             for (int i = 0; i < chessWidth; i++) {
@@ -64,32 +69,45 @@ public class KlotskiLayout extends RelativeLayout {
                 }
             }
         }
-        KlotskiButton kButton;
-        for (int i = 0; i < buttons.length; i++) {
-            kButton = buttons[i];
-            switch(kButton.getType()){
+        int [][] buttons = chessButtonArray.buttonArray;
+        for (int i = 0; i < chessButtonArray.buttonNum; i++) {
+            Log.d("testttttttt","tttttttttttttttttttttttttttttttttttttttttttt"+String.valueOf(chessButtonArray.buttonNum));
+
+            switch(buttons[i][1]){
                 case 1:
-                    this.chess[kButton.getMyLocX()][kButton.getMyLocY()]=1;
+                    this.chess[buttons[i][2]][buttons[i][3]]=1;
                     break;
                 case 2:
-                    this.chess[kButton.getMyLocX()][kButton.getMyLocY()]=1;
-                    this.chess[kButton.getMyLocX()+1][kButton.getMyLocY()]=1;
+                    this.chess[buttons[i][2]][buttons[i][3]]=1;
+                    this.chess[buttons[i][2]+1][buttons[i][3]]=1;
                     break;
                 case 3:
-                    this.chess[kButton.getMyLocX()][kButton.getMyLocY()]=1;
-                    this.chess[kButton.getMyLocX()][kButton.getMyLocY()+1]=1;
+                    this.chess[buttons[i][2]][buttons[i][3]]=1;
+                    this.chess[buttons[i][2]][buttons[i][3]+1]=1;
                     break;
                 case 4:
-                    this.chess[kButton.getMyLocX()][kButton.getMyLocY()]=1;
-                    this.chess[kButton.getMyLocX()+1][kButton.getMyLocY()]=1;
-                    this.chess[kButton.getMyLocX()][kButton.getMyLocY()+1]=1;
-                    this.chess[kButton.getMyLocX()+1][kButton.getMyLocY()+1]=1;
+                    this.chess[buttons[i][2]][buttons[i][3]]=1;
+                    this.chess[buttons[i][2]+1][buttons[i][3]]=1;
+                    this.chess[buttons[i][2]][buttons[i][3]+1]=1;
+                    this.chess[buttons[i][2]+1][buttons[i][3]+1]=1;
                     break;
+            }
+        }
+        Log.d("testttttttt","ttttttttttttttttt"+String.valueOf(this.chess[0].length));
+
+        for(int i=0;i<4;i++){
+            for(int j=0;j<5;j++){
+                Log.d("testttttttt","ttttttttttttttttttttt"+String.valueOf(j));
+
+                Log.d("testttttttt","tttttttttttttt"+String.valueOf(this.chess[i][j]));
             }
         }
     }
 
     public void setChessOne(KlotskiButton kButton) {
+        /**
+         * 某个button放置
+         */
         switch(kButton.getType()){
             case 1:
                 this.chess[kButton.getMyLocX()][kButton.getMyLocY()]=1;
@@ -112,6 +130,9 @@ public class KlotskiLayout extends RelativeLayout {
     }
 
     public void setChessZero(KlotskiButton kButton) {
+        /**
+         * 某个button移动
+         */
         switch(kButton.getType()){
             case 1:
                 this.chess[kButton.getMyLocX()][kButton.getMyLocY()]=0;
@@ -141,8 +162,65 @@ public class KlotskiLayout extends RelativeLayout {
         }
     }
 
-//    @Override
-//    public boolean onInterceptTouchEvent(MotionEvent ev){
-//        return true;
-//    }
+
+
+    public static class ChessButtonArray implements Serializable {
+        private int[][] buttonArray;
+        private int buttonNum;
+        public ChessButtonArray(int buttonNum){
+            this.buttonNum = buttonNum;
+            this.buttonArray = new int[buttonNum][];
+            for(int i=0;i<buttonNum;i++){
+                this.buttonArray[i] = new int[4];
+            }
+        }
+        public ChessButtonArray(int buttonNum,int[][] tempChess){
+            this.buttonNum = buttonNum;
+            this.buttonArray = new int[buttonNum][];
+            for(int i=0;i<buttonNum;i++){
+                this.buttonArray[i] = new int[4];
+            }
+            this.init(tempChess);
+        }
+        public void init(int[][] tempChess){
+            try {
+                for (int i = 0; i < this.buttonNum; i++) {
+                    for (int j = 0; j < 4; j++) {
+                        this.buttonArray[i][j] = tempChess[i][j];
+                    }
+                }
+            }
+            catch (Exception e){
+                Log.d("CHESS",String.valueOf(e));
+            }
+        }
+
+        public int getButtonNum(){
+            return buttonNum;
+        }
+        public int[][] getButtonArray(){
+            return buttonArray;
+        }
+
+        public int getDiffIndex(ChessButtonArray another){
+            /**
+             * 对比按钮快照
+             */
+            for(int i=0;i<buttonNum;i++){
+                if(this.buttonArray[i][2]!=another.buttonArray[i][2] || this.buttonArray[i][3]!=another.buttonArray[i][3]){
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        public void setOneButton(int index, int[] newButton){
+            /**
+             * 重置某个按钮
+             */
+            for(int i=0;i<4;i++){
+                this.buttonArray[index][i] = newButton[i];
+            }
+        }
+    }
 }

@@ -2,4 +2,7 @@
     <string name="app_name">klotski</string>
     <string name="begin_text">开始游戏</string>
     <string name="steps_num">步数：</string>
+    <string name="undo">回退</string>
+    <string name="refresh">重来</string>
+    <string name="style">样式</string>
 </resources>

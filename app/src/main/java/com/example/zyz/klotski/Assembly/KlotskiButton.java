@@ -26,16 +26,11 @@ public class KlotskiButton extends Button {
     private int type;
     private int myLocX = 0;//左上各自的位置
     private int myLocY = 0;
-    private float myAbsX,myAbsY;
     private int myWidth;
     private int myHeight;
 
     private int unitButtonLength;
 
-
-    public class Chess implements Serializable {
-
-    }
 
     public static int[][] getInitArray(int buttonNum){
         int[][] allButton = new int[buttonNum][];
@@ -49,7 +44,6 @@ public class KlotskiButton extends Button {
         allButton[7] = new int[]{7,1,1,3};
         allButton[8] = new int[]{8,1,2,3};
         allButton[9] = new int[]{9,1,3,4};
-
         return allButton;
     }
 
@@ -81,16 +75,28 @@ public class KlotskiButton extends Button {
         }
     }
 
-    public void updatePosition(int x,int y){
+    public void resetByArray(int[] tempArray){
+        this.myLocX = tempArray[2];
+        this.myLocY = tempArray[3];
+        this.setAbsPositionByLoc();
+    }
+
+    public void setLocPosition(int x,int y){
         this.myLocX=x;
         this.myLocY=y;
     }
+    public void setAbsPosition(float left,float top){
+        this.setX(left);
+        this.setY(top);
+    }
+    public void setAbsPositionByLoc(){
+        this.setX(this.myLocX*unitButtonLength);
+        this.setY(this.myLocY*unitButtonLength);
+    }
     public int getMyLocX() {return myLocX;}
     public int getMyLocY() {return myLocY;}
-
     public int getIndex() {return index;}
     public void setIndex(int index) {this.index = index;}
-
     public int getType() {return type;}
     public void setType(int type) {this.type = type;}
     public int getMyWidth() {return myWidth;}
@@ -129,23 +135,4 @@ public class KlotskiButton extends Button {
         return result;
     }
 
-    public static void setStyle1(KlotskiButton[] klotskiButtons){
-        for(int i=0;i<klotskiButtons.length;i++) {
-            int type = klotskiButtons[i].getType();
-            switch (type) {
-                case 1:
-                    klotskiButtons[i].setBackgroundResource(R.drawable.my_button_style1_1);
-                    break;
-                case 2:
-                    klotskiButtons[i].setBackgroundResource(R.drawable.my_button_style1_2);
-                    break;
-                case 3:
-                    klotskiButtons[i].setBackgroundResource(R.drawable.my_button_style1_3);
-                    break;
-                case 4:
-                    klotskiButtons[i].setBackgroundResource(R.drawable.my_button_style1_4);
-                    break;
-            }
-        }
-    }
 }

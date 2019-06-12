@@ -10,4 +10,13 @@
         <item name="android:splitMotionEvents">false</item>
     </style>
 
+
+    <style name="dialog" parent="android:Theme.Material.Dialog">
+        <!--<item name="android:windowIsFloating">true</item>  //是否浮现在activity之上-->
+        <!--<item name="android:windowIsTranslucent">true</item> //是否半透明-->
+        <!--<item name="android:windowNoTitle">@null</item>  //是否显示title-->
+        <item name="android:dialogCornerRadius">20px</item>
+        <!--<item name="android:backgroundDimEnabled">true</item>-->
+        <!--<item name="android:windowContentOverlay">@null</item>-->
+    </style>
 </resources>
