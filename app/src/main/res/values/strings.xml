@@ -1,8 +1,28 @@
 <resources>
-    <string name="app_name">klotski</string>
+    <string name="app_name">华容道</string>
     <string name="begin_text">开始游戏</string>
     <string name="steps_num">步数：</string>
     <string name="undo">回退</string>
     <string name="refresh">重来</string>
     <string name="style">样式</string>
+    <string name="time">时间：</string>
+    <string name="choose_style">请选择样式</string>
+    <string name="choose_game">选择关卡</string>
+    <string name="choose_game_page">选择关卡</string>
+    <string name="start_game">开始游戏</string>
+    <string name="choose_game_button">选择关卡</string>
+    <string name="description_button">游戏简介</string>
+    <string name="game_descrip">游戏简介</string>
+    <string name="description_content">游戏玩法：\n通过移动各个棋子，帮助曹操（最大的方块）从初始位置移到棋盘最下方中部，从出口逃走。不允许跨越棋子，还要设法用最少的步数把曹操移到出口，多次通关棋局将会保存所用最少时间及最少步数（时间和步数记录是独立的）。
+\n\n回退按钮：\n点击回退至上一步棋局，可多次回退直至棋局初始布局。
+\n\n重置按钮：\n点击重置当前局为棋局初始布局。
+\n\n样式按钮：\n点击更换界面风格，共四种界面风格。
+</string>
+    <string name="about">关于应用</string>
+    <string name="about_title">关于应用</string>
+    <string name="about_content">版本信息：\n版本号：1.0.0
+\n\n作者信息：\n张宇哲  NKU
+\n\n反馈方式：\nchinasdzyz@gmail.com\nhttps://github.com/Zhang-YZ
+\n\n声明：\n本应用不获取任何有关用户信息。
+</string>
 </resources>

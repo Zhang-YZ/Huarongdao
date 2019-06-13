@@ -19,6 +19,7 @@ public class KlotskiLayout extends RelativeLayout {
     public KlotskiLayout(Context context) {
         super(context);
     }
+
     public KlotskiLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
@@ -26,10 +27,8 @@ public class KlotskiLayout extends RelativeLayout {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        Log.d(GamePage.LOG_MESSAGE, "=======================Layout_onMeasure");
         int width = KlotskiButton.measureLength(widthMeasureSpec, "layout");
         int height = KlotskiButton.measureLength(heightMeasureSpec, "layout");
-        Log.d(GamePage.LOG_MESSAGE, "=======================Layout onMeasure mode " + width + " " + height);
     }
 
     // 当布局时调用
@@ -42,9 +41,10 @@ public class KlotskiLayout extends RelativeLayout {
             int unitButtonLength = tempButton.getUnitButtonLength();
             int childLeft = tempButton.getMyLocX() * unitButtonLength + left;
             int childtop = tempButton.getMyLocY() * unitButtonLength + top;
-            tempButton.layout(childLeft, childtop, childLeft + tempButton.getMeasuredWidth(), childtop + tempButton.getMeasuredHeight());
+            tempButton.setX(childLeft);
+            tempButton.setY(childtop);
+            //tempButton.layout(childLeft, childtop, childLeft + tempButton.getMeasuredWidth(), childtop + tempButton.getMeasuredHeight());
         }
-        Log.d(GamePage.LOG_MESSAGE, "=======================Layout_onLayout " + changed + " " + left + " " + top + " " + right + " " + bottom);
     }
 
 
@@ -69,62 +69,59 @@ public class KlotskiLayout extends RelativeLayout {
                 }
             }
         }
-        int [][] buttons = chessButtonArray.buttonArray;
+        int[][] buttons = chessButtonArray.buttonArray;
         for (int i = 0; i < chessButtonArray.buttonNum; i++) {
-            Log.d("testttttttt","tttttttttttttttttttttttttttttttttttttttttttt"+String.valueOf(chessButtonArray.buttonNum));
-
-            switch(buttons[i][1]){
+            switch (buttons[i][1]) {
                 case 1:
-                    this.chess[buttons[i][2]][buttons[i][3]]=1;
+                    this.chess[buttons[i][2]][buttons[i][3]] = 1;
                     break;
                 case 2:
-                    this.chess[buttons[i][2]][buttons[i][3]]=1;
-                    this.chess[buttons[i][2]+1][buttons[i][3]]=1;
+                    this.chess[buttons[i][2]][buttons[i][3]] = 1;
+                    this.chess[buttons[i][2] + 1][buttons[i][3]] = 1;
                     break;
                 case 3:
-                    this.chess[buttons[i][2]][buttons[i][3]]=1;
-                    this.chess[buttons[i][2]][buttons[i][3]+1]=1;
+                    this.chess[buttons[i][2]][buttons[i][3]] = 1;
+                    this.chess[buttons[i][2]][buttons[i][3] + 1] = 1;
                     break;
                 case 4:
-                    this.chess[buttons[i][2]][buttons[i][3]]=1;
-                    this.chess[buttons[i][2]+1][buttons[i][3]]=1;
-                    this.chess[buttons[i][2]][buttons[i][3]+1]=1;
-                    this.chess[buttons[i][2]+1][buttons[i][3]+1]=1;
+                    this.chess[buttons[i][2]][buttons[i][3]] = 1;
+                    this.chess[buttons[i][2] + 1][buttons[i][3]] = 1;
+                    this.chess[buttons[i][2]][buttons[i][3] + 1] = 1;
+                    this.chess[buttons[i][2] + 1][buttons[i][3] + 1] = 1;
                     break;
             }
         }
-        Log.d("testttttttt","ttttttttttttttttt"+String.valueOf(this.chess[0].length));
 
-        for(int i=0;i<4;i++){
-            for(int j=0;j<5;j++){
-                Log.d("testttttttt","ttttttttttttttttttttt"+String.valueOf(j));
-
-                Log.d("testttttttt","tttttttttttttt"+String.valueOf(this.chess[i][j]));
-            }
-        }
+//        for(int i=0;i<4;i++){
+//            for(int j=0;j<5;j++){
+//                Log.d("testttttttt","ttttttttttttttttttttt"+String.valueOf(j));
+//
+//                Log.d("testttttttt","tttttttttttttt"+String.valueOf(this.chess[i][j]));
+//            }
+//        }
     }
 
     public void setChessOne(KlotskiButton kButton) {
         /**
          * 某个button放置
          */
-        switch(kButton.getType()){
+        switch (kButton.getType()) {
             case 1:
-                this.chess[kButton.getMyLocX()][kButton.getMyLocY()]=1;
+                this.chess[kButton.getMyLocX()][kButton.getMyLocY()] = 1;
                 break;
             case 2:
-                this.chess[kButton.getMyLocX()][kButton.getMyLocY()]=1;
-                this.chess[kButton.getMyLocX()+1][kButton.getMyLocY()]=1;
+                this.chess[kButton.getMyLocX()][kButton.getMyLocY()] = 1;
+                this.chess[kButton.getMyLocX() + 1][kButton.getMyLocY()] = 1;
                 break;
             case 3:
-                this.chess[kButton.getMyLocX()][kButton.getMyLocY()]=1;
-                this.chess[kButton.getMyLocX()][kButton.getMyLocY()+1]=1;
+                this.chess[kButton.getMyLocX()][kButton.getMyLocY()] = 1;
+                this.chess[kButton.getMyLocX()][kButton.getMyLocY() + 1] = 1;
                 break;
             case 4:
-                this.chess[kButton.getMyLocX()][kButton.getMyLocY()]=1;
-                this.chess[kButton.getMyLocX()+1][kButton.getMyLocY()]=1;
-                this.chess[kButton.getMyLocX()][kButton.getMyLocY()+1]=1;
-                this.chess[kButton.getMyLocX()+1][kButton.getMyLocY()+1]=1;
+                this.chess[kButton.getMyLocX()][kButton.getMyLocY()] = 1;
+                this.chess[kButton.getMyLocX() + 1][kButton.getMyLocY()] = 1;
+                this.chess[kButton.getMyLocX()][kButton.getMyLocY() + 1] = 1;
+                this.chess[kButton.getMyLocX() + 1][kButton.getMyLocY() + 1] = 1;
                 break;
         }
     }
@@ -133,92 +130,86 @@ public class KlotskiLayout extends RelativeLayout {
         /**
          * 某个button移动
          */
-        switch(kButton.getType()){
+        switch (kButton.getType()) {
             case 1:
-                this.chess[kButton.getMyLocX()][kButton.getMyLocY()]=0;
+                this.chess[kButton.getMyLocX()][kButton.getMyLocY()] = 0;
                 break;
             case 2:
-                this.chess[kButton.getMyLocX()][kButton.getMyLocY()]=0;
-                this.chess[kButton.getMyLocX()+1][kButton.getMyLocY()]=0;
+                this.chess[kButton.getMyLocX()][kButton.getMyLocY()] = 0;
+                this.chess[kButton.getMyLocX() + 1][kButton.getMyLocY()] = 0;
                 break;
             case 3:
-                this.chess[kButton.getMyLocX()][kButton.getMyLocY()]=0;
-                this.chess[kButton.getMyLocX()][kButton.getMyLocY()+1]=0;
+                this.chess[kButton.getMyLocX()][kButton.getMyLocY()] = 0;
+                this.chess[kButton.getMyLocX()][kButton.getMyLocY() + 1] = 0;
                 break;
             case 4:
-                this.chess[kButton.getMyLocX()][kButton.getMyLocY()]=0;
-                this.chess[kButton.getMyLocX()+1][kButton.getMyLocY()]=0;
-                this.chess[kButton.getMyLocX()][kButton.getMyLocY()+1]=0;
-                this.chess[kButton.getMyLocX()+1][kButton.getMyLocY()+1]=0;
+                this.chess[kButton.getMyLocX()][kButton.getMyLocY()] = 0;
+                this.chess[kButton.getMyLocX() + 1][kButton.getMyLocY()] = 0;
+                this.chess[kButton.getMyLocX()][kButton.getMyLocY() + 1] = 0;
+                this.chess[kButton.getMyLocX() + 1][kButton.getMyLocY() + 1] = 0;
                 break;
         }
     }
 
-    public boolean judgeEmpty(int x, int y){
-        if(x>=GamePage.LENGTH_CHESS_X || y>=GamePage.LENGTH_CHESS_Y ||x<0||y<0)
+    public boolean judgeEmpty(int x, int y) {
+        if (x >= GamePage.LENGTH_CHESS_X || y >= GamePage.LENGTH_CHESS_Y || x < 0 || y < 0)
             return false;
-        else{
-            return this.chess[x][y]==0;
+        else {
+            return this.chess[x][y] == 0;
         }
     }
-
 
 
     public static class ChessButtonArray implements Serializable {
         private int[][] buttonArray;
         private int buttonNum;
-        public ChessButtonArray(int buttonNum){
+
+        public ChessButtonArray(int buttonNum, int[][] tempChess) {
             this.buttonNum = buttonNum;
             this.buttonArray = new int[buttonNum][];
-            for(int i=0;i<buttonNum;i++){
-                this.buttonArray[i] = new int[4];
-            }
-        }
-        public ChessButtonArray(int buttonNum,int[][] tempChess){
-            this.buttonNum = buttonNum;
-            this.buttonArray = new int[buttonNum][];
-            for(int i=0;i<buttonNum;i++){
+            for (int i = 0; i < buttonNum; i++) {
                 this.buttonArray[i] = new int[4];
             }
             this.init(tempChess);
         }
-        public void init(int[][] tempChess){
+
+        public void init(int[][] tempChess) {
             try {
                 for (int i = 0; i < this.buttonNum; i++) {
                     for (int j = 0; j < 4; j++) {
                         this.buttonArray[i][j] = tempChess[i][j];
                     }
                 }
-            }
-            catch (Exception e){
-                Log.d("CHESS",String.valueOf(e));
+            } catch (Exception e) {
+                Log.d("CHESS", String.valueOf(e));
             }
         }
 
-        public int getButtonNum(){
+        public int getButtonNum() {
             return buttonNum;
         }
-        public int[][] getButtonArray(){
+
+        public int[][] getButtonArray() {
             return buttonArray;
         }
 
-        public int getDiffIndex(ChessButtonArray another){
+        public int getDiffIndex(ChessButtonArray another) {
             /**
              * 对比按钮快照
              */
-            for(int i=0;i<buttonNum;i++){
-                if(this.buttonArray[i][2]!=another.buttonArray[i][2] || this.buttonArray[i][3]!=another.buttonArray[i][3]){
+            for (int i = 0; i < buttonNum; i++) {
+                if (this.buttonArray[i][2] != another.buttonArray[i][2] || this.buttonArray[i][3] != another.buttonArray[i][3]) {
                     return i;
                 }
             }
             return -1;
         }
 
-        public void setOneButton(int index, int[] newButton){
+        public void setOneButton(int index, int[] newButton) {
             /**
              * 重置某个按钮
              */
-            for(int i=0;i<4;i++){
+            for (int i = 0; i < 4; i++) {
                 this.buttonArray[index][i] = newButton[i];
             }
         }

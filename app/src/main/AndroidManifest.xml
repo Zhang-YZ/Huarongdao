@@ -21,7 +21,9 @@
         <activity
             android:name=".GamePage"
             android:screenOrientation="portrait" />
-
+        <activity android:name=".ChooseGame" />
+        <activity android:name=".Description" />
+        <activity android:name=".About"></activity>
     </application>
 
 </manifest>
