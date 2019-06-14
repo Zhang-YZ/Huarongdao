@@ -8,12 +8,12 @@
     android:id = "@+id/main_layout">
     <!--android:onClick="getPosition"-->
 
-    <com.example.zyz.klotski.Assembly.KlotskiLayout
+    <klotski.klotski.zyz.klotski.Assembly.KlotskiLayout
         android:id="@+id/my_klotskiLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </com.example.zyz.klotski.Assembly.KlotskiLayout>
+    </klotski.klotski.zyz.klotski.Assembly.KlotskiLayout>
 
 
 </RelativeLayout>
